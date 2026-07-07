@@ -1,0 +1,20 @@
+{
+  "name": "hung-doan",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bilingual personal website of Hung Doan, built with Astro for GitHub Pages.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "node scripts/check-placeholders.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/literata": "^5.1.0",
+    "@fontsource/be-vietnam-pro": "^5.1.0",
+    "astro": "^5.1.0"
+  }
+}

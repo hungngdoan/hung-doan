@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hungngdoan.github.io/hung-doan/sitemap-index.xml

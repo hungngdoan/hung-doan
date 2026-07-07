@@ -1,0 +1,40 @@
+---
+import { site, t, otherLocale, type Locale } from '../content/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const other = otherLocale(locale);
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+const switchHref = other === 'vi' ? base : `${base}en/`;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href={site.links.linkedin} rel="me noopener">LinkedIn</a>
+      <a href={site.links.github} rel="me noopener">GitHub</a>
+      <a href={site.links.journal} rel="me noopener">Hưng’s Journal</a>
+      {
+        site.links.email && (
+          <a href={`mailto:${site.links.email}`}>
+            {t(site.footer.contactLabel, locale)}
+          </a>
+        )
+      }
+    </div>
+    <p class="footer-note">{t(site.footer.note, locale)}</p>
+    <p class="footer-meta">
+      © {year} {site.name}. {t(site.footer.rights, locale)}
+      {' · '}
+      <a href={switchHref} hreflang={other} lang={other}>
+        {t(site.footer.switchLabel, locale)}
+      </a>
+    </p>
+  </div>
+</footer>

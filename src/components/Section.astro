@@ -1,0 +1,28 @@
+---
+import type { Locale } from '../content/site';
+
+interface Props {
+  id: string;
+  num: string;
+  title: string;
+  whisper: string;
+  /** Language of the whispered subtitle (the other locale). */
+  whisperLang: Locale;
+}
+
+const { id, num, title, whisper, whisperLang } = Astro.props;
+const headingId = `${id}-title`;
+---
+
+<section id={id} class="section reveal" aria-labelledby={headingId}>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num" aria-hidden="true">{num}</span>
+      <h2 id={headingId}>
+        {title}
+        <span class="section-whisper" lang={whisperLang}>{whisper}</span>
+      </h2>
+    </div>
+    <slot />
+  </div>
+</section>

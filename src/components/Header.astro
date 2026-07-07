@@ -1,0 +1,44 @@
+---
+import { site, t, otherLocale, type Locale } from '../content/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const other = otherLocale(locale);
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+const homeHref = locale === 'vi' ? base : `${base}en/`;
+const switchHref = other === 'vi' ? base : `${base}en/`;
+const switchTitle =
+  other === 'vi' ? 'Đọc trang này bằng tiếng Việt' : 'Read this page in English';
+---
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="masthead-name" href={homeHref}>
+      {site.name}<span class="dot">.</span>
+    </a>
+    <nav class="masthead-nav" aria-label={locale === 'vi' ? 'Điều hướng' : 'Navigation'}>
+      {
+        site.nav.map((item) => (
+          <a class="anchor-link" href={`#${item.id}`}>
+            {t(item.label, locale)}
+          </a>
+        ))
+      }
+      <a
+        class="lang-switch"
+        href={switchHref}
+        hreflang={other}
+        lang={other}
+        title={switchTitle}
+        aria-label={switchTitle}
+      >
+        {other.toUpperCase()}
+      </a>
+    </nav>
+  </div>
+</header>
